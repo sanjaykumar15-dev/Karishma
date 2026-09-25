@@ -35,7 +35,7 @@
       top: 0; left: 0;
       width: 100%; height: 100%;
       pointer-events: none;
-      z-index: 0;
+      z-index: 20;
       overflow: hidden;
     }
     .heart-float {
@@ -50,7 +50,7 @@
       100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
     }
 
-    /* ── NAMED HEARTS (scroll-triggered, varying sizes, her name inside) ── */
+    /* ── NAMED HEARTS (continuous flow, varying sizes, her name inside) ── */
     .named-heart {
       position: absolute;
       bottom: -100px;
@@ -94,6 +94,16 @@
       padding: 60px 20px;
     }
 
+    /* ── PHOTO CAPTIONS (small romantic line under a photo) ── */
+    .photo-caption {
+      font-family: 'Dancing Script', cursive;
+      color: var(--rose);
+      font-size: 1.15rem;
+      text-align: center;
+      margin-top: -12px;
+      margin-bottom: 18px;
+    }
+
     /* ── HERO ── */
     #hero {
       background: linear-gradient(160deg, #ffe0ec 0%, #fce4ff 50%, #ffe0ec 100%);
@@ -106,7 +116,7 @@
       border: 6px solid white;
       box-shadow: 0 0 0 4px var(--pink), 0 20px 50px rgba(255,107,157,0.4);
       animation: photoFloat 3s ease-in-out infinite;
-      margin-bottom: 28px;
+      margin-bottom: 14px;
     }
     @keyframes photoFloat {
       0%,100% { transform: translateY(0); }
@@ -198,17 +208,21 @@
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      gap: 18px 14px;
       max-width: 800px;
       width: 100%;
       height: 100%;
+    }
+    .gallery-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .gallery-item {
       border-radius: 20px;
       overflow: hidden;
       aspect-ratio: 1;
       width: 100%;
-      height: 100%;
       position: relative;
       box-shadow: 0 6px 20px rgba(255,61,127,0.15);
       transition: transform .3s;
@@ -229,6 +243,15 @@
       opacity: 0; transition: opacity .3s;
     }
     .gallery-item:hover .overlay { opacity: 1; }
+    .gallery-caption {
+      font-family: 'Dancing Script', cursive;
+      color: var(--rose);
+      font-size: .85rem;
+      text-align: center;
+      margin-top: 6px;
+      line-height: 1.3;
+      padding: 0 2px;
+    }
 
     /* ── CAROUSEL SECTION ── */
     #carousel-section {
@@ -246,10 +269,10 @@
       border-radius: 28px;
       overflow: hidden;
       box-shadow: 0 20px 60px rgba(255,61,127,0.25);
+      background: white;
     }
     .carousel-slide {
       display: none;
-      position: relative;
     }
     .carousel-slide.active { display: block; }
     .carousel-slide img {
@@ -259,19 +282,15 @@
       display: block;
     }
     .carousel-caption {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      background: linear-gradient(to top, rgba(255,61,127,0.7), transparent);
-      padding: 20px;
+      padding: 14px 22px 18px;
       text-align: center;
       font-family: 'Dancing Script', cursive;
-      font-size: 1.4rem;
-      color: white;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      font-size: 1.3rem;
+      color: var(--rose);
     }
     .carousel-btn {
       position: absolute;
-      top: 50%;
+      top: 42%;
       transform: translateY(-50%);
       background: white;
       border: none;
@@ -357,7 +376,7 @@
       object-fit: cover;
       border: 5px solid white;
       box-shadow: 0 0 0 4px var(--lilac), 0 15px 40px rgba(197,108,214,0.35);
-      margin-bottom: 28px;
+      margin-bottom: 14px;
       animation: spin3d 6s ease-in-out infinite;
     }
     @keyframes spin3d {
@@ -386,9 +405,9 @@
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
-      min-height: 160px;
+      min-height: 230px;
       width: 100%;
-      max-width: 500px;
+      max-width: 520px;
       position: relative;
     }
     .btn {
@@ -417,12 +436,10 @@
       color: #aaa;
       box-shadow: 0 4px 14px rgba(0,0,0,.08);
       position: absolute;
-      top: 80px;
-      left: 50%;
-      transform: translateX(80px);
-      transition: transform .25s cubic-bezier(.22,1.5,.4,1), top .25s cubic-bezier(.22,1.5,.4,1), left .25s cubic-bezier(.22,1.5,.4,1);
       white-space: nowrap;
-      z-index: 1;
+      z-index: 3;
+      touch-action: none;
+      transition: left .16s ease, top .16s ease, transform .16s ease;
     }
     .btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 
@@ -450,6 +467,13 @@
       width: 100%; height: 100%;
       pointer-events: none; z-index: 999;
     }
+    .yes-photos {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .yes-photo-block { display: flex; flex-direction: column; align-items: center; }
 
     /* ── SPARKLE TRAIL ── */
     .sparkle {
@@ -524,7 +548,12 @@
       50% { box-shadow: 0 5px 30px rgba(255,107,157,0.9); }
     }
 
-    /* ── NOTE BANNER (how to add real photos) ── */
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 10px; }
+
+    /* ── NOTE BANNER (image numbering guide) ── */
     .swap-note {
       max-width: 640px;
       margin: 0 auto 30px;
@@ -536,11 +565,6 @@
       padding: 10px 18px;
       box-shadow: 0 4px 14px rgba(255,107,157,0.1);
     }
-
-    /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: var(--cream); }
-    ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 10px; }
 
     @media (prefers-reduced-motion: reduce) {
       .heart-float, .named-heart, .sparkle, .ribbon-inner, .hero-photo, .cake-wrap, .proposal-photo { animation: none; }
@@ -555,17 +579,17 @@
       .hero-date { font-size: 0.95rem; padding: 8px 18px; }
       .cards-grid { grid-template-columns: 1fr; gap: 16px; }
       .wish-card { padding: 22px 18px; }
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 16px 10px; }
+      .gallery-caption { font-size: .78rem; }
       .reason-item { border-radius: 20px; padding: 14px 18px; font-size: 0.9rem; }
       .section-title { font-size: clamp(1.4rem, 6vw, 2rem); margin-bottom: 24px; }
       section { padding: 50px 16px; }
       .proposal-photo { width: 130px; height: 130px; }
       .proposal-funny { font-size: clamp(1rem, 4vw, 1.3rem); padding: 0 8px; }
-      .btn-wrap { min-height: 200px; max-width: 340px; }
+      .btn-wrap { min-height: 260px; max-width: 340px; }
       .btn { padding: 14px 32px; font-size: 1rem; }
-      #no-btn { top: 90px; left: 50%; transform: translateX(40px); }
       #yes-screen .hero-photo { width: 130px !important; height: 130px !important; }
-      #yes-screen div[style*="display: flex"] { flex-wrap: wrap; justify-content: center; gap: 10px; }
+      .yes-photos { gap: 12px; }
       .music-control { bottom: 1rem; right: 1rem; }
       #musicBtn { width: 48px; height: 48px; font-size: 1.4rem; }
       .cake-wrap { font-size: 3.5rem; }
@@ -575,7 +599,7 @@
     }
 
     @media (max-width: 380px) {
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 14px 8px; }
       .hero-photo { width: 130px; height: 130px; }
     }
   </style>
@@ -588,7 +612,7 @@
 <!-- ░░ RIBBON ░░ -->
 <div class="ribbon">
   <span class="ribbon-inner">
-    🎀 Happy Birthday Gappo 🎀 &nbsp;&nbsp;&nbsp;
+    🎀 Happy Birthday Beautiful 🎀 &nbsp;&nbsp;&nbsp;
     💖 Secretly Best Chat Friends, Publicly Total Strangers In The Corridor 💖 &nbsp;&nbsp;&nbsp;
     🤍 White Is Officially Our Favorite Color 🤍 &nbsp;&nbsp;&nbsp;
     🎂 Wishing You All The Happiness, Karishma 🎂 &nbsp;&nbsp;&nbsp;
@@ -598,10 +622,11 @@
 
 <!-- ░░ HERO ░░ -->
 <section id="hero">
-  <img class="hero-photo" id="hero-photo" alt="Gappo"/>
-  <h1 class="hero-title">Happy Birthday, Gappo! 🎉💖</h1>
+  <img class="hero-photo" id="hero-photo" src="1.jpg" alt="Gappo"/>
+  <p class="photo-caption">You grabbed my heart 💘</p>
+  <h1 class="hero-title">Happy Birthday, Beautiful 🎉💖</h1>
   <p class="hero-subtitle">Same office, same floor almost — still somehow a long-distance relationship 😅</p>
-  <div class="hero-date">🗓️ Your Special Day — logged, unlike our old chats</div>
+  <div class="hero-date">🗓️ Your Special Day — is more special for me</div>
   <div class="scroll-hint">Scroll down before someone from the office walks by 👀</div>
 </section>
 
@@ -612,38 +637,38 @@
 
     <div class="wish-card" style="animation-delay:.1s">
       <span class="emoji">🤫</span>
-      <h3>The Office Secret 😅</h3>
-      <p>We share a building, a floor, sometimes even a lift — and somehow manage to say absolutely nothing to each other in person. Then the chat opens and suddenly there's a lot to talk about. Happy birthday to my favorite contradiction, Karishma.</p>
+      <h3>Our Office Secret 😅</h3>
+      <p>How we talk for hours on chat and nobody in the office has the slightest clue — that is basically our superpower. Best-kept secret of this building, and I'm in no hurry to declassify it.</p>
     </div>
 
     <div class="wish-card" style="animation-delay:.2s">
-      <span class="emoji">💼</span>
-      <h3>IT Support vs. The In-Charge</h3>
-      <p>You're technically the in-charge and I'm technically IT support. You could raise a complaint about me any day, I could "accidentally" prioritize your system requests. Balance of power: zero. I'd still ask your approval on everything anyway 😌</p>
+      <span class="emoji">😤</span>
+      <h3>Getting Scolded By You</h3>
+      <p>You get mad at me over the smallest things, and somehow I still end up smiling through the whole lecture. Only you can scold me and make it sound like a love song.</p>
     </div>
 
     <div class="wish-card" style="animation-delay:.3s">
       <span class="emoji">🩺</span>
-      <h3>Doctor's Orders</h3>
-      <p>You keep telling me I forget our old conversations. Turns out my memory only glitches on the boring stuff — everything about you is permanently saved, no backup needed.</p>
+      <h3>This Memory-Loss Disease</h3>
+      <p>You keep saying "bhul gaye, doctor ko dikhao, bhulakkad badtamiz aadmi" — and somehow I'm addicted to hearing it now. Keep calling me bhulakkad, I'll happily forget everything else in the world just to keep hearing you say it.</p>
     </div>
 
     <div class="wish-card" style="animation-delay:.4s">
       <span class="emoji">🤍</span>
-      <h3>Our Favorite Malfunction</h3>
-      <p>White is officially our shared favorite color, and you in traditional wear is the one bug in my system I never want fixed. Deploying that outfit today is highly recommended, ma'am.</p>
+      <h3>Speaking Power: Unlimited</h3>
+      <p>I love your bak-bak so much, I could listen to you 24 hours a day, 7 days a week, 30 days a month, 365 days a year — for a lifetime. Please, never let it stop.</p>
     </div>
 
     <div class="wish-card" style="animation-delay:.5s">
       <span class="emoji">⏳</span>
       <h3>The Gap That Doesn't Matter</h3>
-      <p>Yes, there's an age gap between us. There's also a gap between when you send "hey" and when I reply — and somehow that one feels bigger. Some things you just learn to live with.</p>
+      <p>Age is just a number — what actually matters is how good we look together. And okay fine, you look a little older than your age 😜 and I look younger (still like you anyway, relax).</p>
     </div>
 
     <div class="wish-card" style="animation-delay:.6s">
       <span class="emoji">🛗</span>
-      <h3>Corridor Strangers, Chat Best Friends</h3>
-      <p>In the office hallway we're basically two people with excellent eye-contact-avoidance skills. On chat, we're basically inseparable. One of these needs fixing, Gappo, and it's not the second one.</p>
+      <h3>Corridor Strangers, Chat Best Buddies</h3>
+      <p>In the office hallway we're basically two people with excellent eye-contact-avoidance skills. On chat, we're basically inseparable. One of these needs fixing, Gappo, and it's definitely not the second one.</p>
     </div>
 
   </div>
@@ -652,13 +677,13 @@
 <!-- ░░ GALLERY ░░ -->
 <section id="gallery">
   <h2 class="section-title">📸 Sweet Memories</h2>
-  <p class="swap-note">These are placeholder tiles — swap each &lt;img&gt; src with your real photos of Karishma whenever you're ready.</p>
+  <p class="swap-note">This section loads 5.jpg through 16.jpg from the same folder as index.html.</p>
   <div class="gallery-grid" id="gallery-grid"></div>
 </section>
 
 <!-- ░░ CAROUSEL SECTION ░░ -->
 <section id="carousel-section">
-  <h2 class="section-title">🎠 Our Special Moments</h2>
+  <h2 class="section-title">🎠 Your Special Moments</h2>
   <div class="carousel-wrapper">
     <div class="carousel-track" id="carousel-track">
       <button class="carousel-btn carousel-prev" onclick="changeSlide(-1)">&#8249;</button>
@@ -671,35 +696,36 @@
 
 <!-- ░░ REASONS ░░ -->
 <section id="reasons">
-  <h2 class="section-title">💝 Why I Like My Gappo</h2>
+  <h2 class="section-title">💝 Why I Fall For You</h2>
   <div class="reasons-list">
-    <div class="reason-item" style="animation-delay:.1s"><span>🩺</span> You keep diagnosing me with "severe short-term memory" and prescribing a doctor visit. Jury's still out — but I remember every word you've ever typed.</div>
-    <div class="reason-item" style="animation-delay:.2s"><span>💼</span> In the office you're my in-charge. Outside it, you're the only notification I check twice.</div>
-    <div class="reason-item" style="animation-delay:.3s"><span>🤍</span> You in white traditional wear should legally require a company-wide notice.</div>
-    <div class="reason-item" style="animation-delay:.4s"><span>🛗</span> We work floors apart and share maybe one silent elevator ride a week, yet you know more about my day than my own team does.</div>
-    <div class="reason-item" style="animation-delay:.5s"><span>⏳</span> The age gap between us is shorter than the time it takes you to reply on chat. And I still wait happily.</div>
+    <div class="reason-item" style="animation-delay:.1s"><span>🩺</span> You always say I forget things — maybe true. But somehow I never forget a single word you type.</div>
+    <div class="reason-item" style="animation-delay:.2s"><span>💼</span> In the office we act like total strangers, and outside it we're basically in a relationship nobody else knows about.</div>
+    <div class="reason-item" style="animation-delay:.3s"><span>🤍</span> I genuinely feel like I'm losing my mind a little every time I see you in traditional wear.</div>
+    <div class="reason-item" style="animation-delay:.4s"><span>👀</span> We barely cross paths at work, just a few quick hellos in passing — yet you somehow know more about my day than my own team does.</div>
+    <div class="reason-item" style="animation-delay:.5s"><span>⏳</span> If you're with me, I'll manage literally everything else — deal?</div>
     <div class="reason-item" style="animation-delay:.6s"><span>🧠</span> You catch every excuse I make for forgetting our old conversations — and don't give up on me anyway.</div>
-    <div class="reason-item" style="animation-delay:.7s"><span>🎫</span> IT support to In-charge, ticket #1: "I like you." Status: still open, hoping it stays that way.</div>
-    <div class="reason-item" style="animation-delay:.8s"><span>🤝</span> White is our shared favorite color. Comfortable silence in the hallway is apparently ours too — every other silence, though, I'd trade for one more chat.</div>
+    <div class="reason-item" style="animation-delay:.7s"><span>🎫</span> We share office secrets nobody else knows exist, and act perfectly clueless about it in front of everyone.</div>
+    <div class="reason-item" style="animation-delay:.8s"><span>🤝</span> White looks great on both of us. But nothing beats seeing your name pop up on my screen.</div>
   </div>
 </section>
 
 <!-- ░░ PROPOSAL ░░ -->
 <section id="proposal">
   <div class="cake-wrap">🎂</div>
-  <img class="proposal-photo" id="proposal-photo" alt="Karishma"/>
+  <img class="proposal-photo" id="proposal-photo" src="2.jpg" alt="Karishma"/>
+  <p class="photo-caption">I could die for your smile 😍</p>
 
-  <h2 class="proposal-q">Since we're both experts at hallway silence... 🥺</h2>
+  <h2 class="proposal-q">Since we're both experts at hallway silence...</h2>
 
   <p class="proposal-funny">
-    Karishma, forget the office protocol for one second. Skip the badge-in silence, skip the "we don't know each other" look we've both perfected. <br><br>
-    Doctor's orders were checkup and rest — I'd like to propose a slight amendment: dinner, in white, no chat required. 🤍<br><br>
-    So tell me honestly, Gappo — <strong>will you go on a date with me?</strong> 🙈
+    Karishma, Just forget about everything Would u like to go on a date with me? nahi gussa nahi hona 😅<br><br>
+    Doctor's orders were checkup and rest — I'd like to propose a slight amendment: dinner, make me feel better. 🤍<br><br>
+    So tell me honestly, sweetheart — <strong>will you go on a date with me?</strong> 🙈
   </p>
 
   <div class="btn-wrap" id="btn-wrap">
     <button class="btn" id="yes-btn" onclick="sayYes()">Haan, I do! 💖</button>
-    <button class="btn" id="no-btn" onmouseenter="runAway()" ontouchstart="runAway()">No 😅</button>
+    <button class="btn" id="no-btn">No 😅</button>
   </div>
   <p id="no-taunt" style="margin-top:20px;color:#c56cd6;font-family:'Dancing Script',cursive;font-size:1.2rem;min-height:30px;"></p>
 </section>
@@ -709,22 +735,28 @@
   <canvas class="confetti-burst" id="confetti-canvas"></canvas>
   <div class="cake-wrap">🥳</div>
 
-  <h2 class="yes-title">Gappo said yes! 💕🎉</h2>
+  <h2 class="yes-title">You Said Yes! 💕🎉</h2>
   <p class="yes-subtitle">Somewhere in the office, one silent hallway just got a lot less silent 😌✨</p>
 
   <br>
-  <div style="display: flex;">
-    <img class="hero-photo" id="yes-photo-1" style="width:180px;height:180px;border-color:#ffd700;" alt="Karishma"/>
-    <img class="hero-photo" id="yes-photo-2" style="width:180px;height:180px;border-color:#ffd700;" alt="Karishma"/>
+  <div class="yes-photos">
+    <div class="yes-photo-block">
+      <img class="hero-photo" id="yes-photo-1" style="width:180px;height:180px;border-color:#ffd700;" src="3.jpg" alt="Karishma"/>
+      <p class="photo-caption">Dying to see you in black 🖤</p>
+    </div>
+    <div class="yes-photo-block">
+      <img class="hero-photo" id="yes-photo-2" style="width:180px;height:180px;border-color:#ffd700;" src="4.jpg" alt="Karishma"/>
+      <p class="photo-caption">Still not over this photo 😌</p>
+    </div>
   </div>
 
-  <p style="margin-top:22px;font-family:'Dancing Script',cursive;font-size:1.6rem;color:var(--lilac)">
-    White outfit, officially confirmed for the date 🤍<br>
-    <span style="font-size:1.15rem;">Gappo = my favorite ticket that never gets closed 🎫✨</span>
+  <p style="margin-top:10px;font-family:'Dancing Script',cursive;font-size:1.6rem;color:var(--lilac)">
+    White outfit, officially confirmed for the date 🤍 😁<br>
+    <span style="font-size:1.15rem;">You are my favorite ticket that never gets closed 🎫✨</span>
   </p>
 
   <p style="margin-top:10px;font-size:1rem;color:#b98daa;max-width:440px;text-align:center;line-height:1.8">
-    Thank you for the doctor jokes, the patience with my memory, and every chat that made the silent office hallway worth it.<br>
+    Thank you for every time you made fun of me, and every chat that made the silent office hallway worth it.<br>
     IT department is officially closed for celebration. 😂💖
   </p>
 </section>
@@ -734,30 +766,15 @@
   <button id="musicBtn" onclick="toggleMusic()" aria-label="Toggle birthday song">🔇</button>
 </div>
 
-<script>
-  /* ── PLACEHOLDER PHOTO GENERATOR (self-contained data URIs, no external files) ── */
-  var PALETTE = [
-    ['#ffd6e8', '#ff9ec7'], ['#ffe9b0', '#ffcf7a'], ['#c6f5ea', '#8fe6d3'],
-    ['#d9c9ff', '#b79dff'], ['#ffc9c9', '#ff9b9b'], ['#bfe3ff', '#8fcaff'],
-    ['#ffe0f0', '#ff8fc0'], ['#e8d9ff', '#c9a8ff']
-  ];
-  function placeholderPhoto(seed, label) {
-    var c = PALETTE[seed % PALETTE.length];
-    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="420" height="420">' +
-      '<defs><linearGradient id="g' + seed + '" x1="0" y1="0" x2="1" y2="1">' +
-      '<stop offset="0%" stop-color="' + c[0] + '"/><stop offset="100%" stop-color="' + c[1] + '"/>' +
-      '</linearGradient></defs>' +
-      '<rect width="420" height="420" fill="url(#g' + seed + ')"/>' +
-      '<text x="50%" y="46%" font-size="52" text-anchor="middle" font-family="sans-serif">📸</text>' +
-      '<text x="50%" y="60%" font-size="20" text-anchor="middle" fill="#5c4634" font-family="Quicksand, sans-serif">' + label + '</text>' +
-      '</svg>';
-    return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
-  }
+<!-- Birthday audio: place bday.mp3 in the same folder as this index.html -->
+<audio id="bday-audio" loop preload="auto">
+  <source src="bday.mp3" type="audio/mpeg">
+</audio>
 
-  document.getElementById('hero-photo').src = placeholderPhoto(0, 'replace: Gappo');
-  document.getElementById('proposal-photo').src = placeholderPhoto(1, 'replace: us together');
-  document.getElementById('yes-photo-1').src = placeholderPhoto(2, 'replace: photo 1');
-  document.getElementById('yes-photo-2').src = placeholderPhoto(3, 'replace: photo 2');
+<script>
+  /* ── GALLERY & CAROUSEL: real numbered photos (1.jpg, 2.jpg, ... in the same folder as index.html) ── */
+  const GALLERY_START = 5;   // gallery uses 5.jpg .. 16.jpg (12 photos)
+  const CAROUSEL_START = 17; // carousel uses 17.jpg .. 24.jpg (8 photos)
 
   /* ── FLOATING HEARTS ── */
   const heartEmojis = ['💖','💕','🌸','💗','✨','🌷','💝','🦋','🌟','💘'];
@@ -778,7 +795,7 @@
   setInterval(spawnHeart, 400);
   for (let i = 0; i < 15; i++) spawnHeart();
 
-  /* ── NAMED HEARTS ON SCROLL (different sizes, her name inside each) ── */
+  /* ── NAMED HEARTS (different sizes, her name inside each, continuous bottom-to-top flow) ── */
   const HEART_NAME = 'Karishma';
   function spawnNamedHeart() {
     const size = 26 + Math.random() * 46; // px, varying sizes
@@ -796,25 +813,17 @@
   }
 
   let scrollHeartCooldown = false;
-  let lastScrollY = window.scrollY;
   window.addEventListener('scroll', () => {
     if (scrollHeartCooldown) return;
     scrollHeartCooldown = true;
-    const movedDown = window.scrollY >= lastScrollY;
-    lastScrollY = window.scrollY;
     const count = 2 + Math.floor(Math.random() * 3);
     for (let i = 0; i < count; i++) {
       setTimeout(spawnNamedHeart, i * 90);
     }
-    void movedDown;
     setTimeout(() => { scrollHeartCooldown = false; }, 260);
   }, { passive: true });
 
-  // continuous bottom-to-top flow of named hearts, independent of scroll/mouse
-  // (interval-based so it works the same on touch-only mobile browsers)
   setInterval(spawnNamedHeart, 750);
-
-  // a small welcoming burst on load too
   for (let i = 0; i < 4; i++) setTimeout(spawnNamedHeart, i * 200);
 
   /* ── SPARKLE TRAIL ── */
@@ -853,26 +862,46 @@
     observer.observe(el);
   });
 
-  /* ── BUILD GALLERY & CAROUSEL FROM PLACEHOLDER PHOTOS ── */
+  /* ── BUILD GALLERY & CAROUSEL FROM REAL NUMBERED PHOTOS, WITH ROMANTIC CAPTIONS ── */
   (function buildMedia() {
-    const galleryLabels = ['office lift','white outfit day','chat screenshot','late reply','doctor joke','desk view','team lunch','after hours','candid win','quiet corridor','coffee break','just because'];
     const galleryEl = document.getElementById('gallery-grid');
     const galleryEmojis = ['💖','🌸','✨','💕','🎀','🦋','💗','🌷','💝','⭐','🥰','🤍'];
-    galleryLabels.forEach((label, i) => {
-      const item = document.createElement('div');
-      item.className = 'gallery-item';
-      item.innerHTML = '<img src="' + placeholderPhoto(i, 'replace: ' + label) + '" alt="' + label + '" loading="lazy"/>' +
-        '<div class="overlay">' + galleryEmojis[i % galleryEmojis.length] + '</div>';
-      galleryEl.appendChild(item);
-    });
+    const galleryCaptions = [
+      "Heart stolen, no refunds 💖",
+      "This smile should be illegal 😅",
+      "My favorite notification, always",
+      "Caught staring, not sorry 👀",
+      "You in white = danger zone 🤍",
+      "Screenshot-worthy, every single time",
+      "Certified heart-eyes moment 😍",
+      "Lives in my head rent-free",
+      "Cute overload, send help 🚨",
+      "My chat's favorite person, hands down",
+      "Too pretty for this office, honestly",
+      "Basically my whole personality now"
+    ];
+    if (galleryEl) {
+      for (let i = 0; i < 12; i++) {
+        const n = GALLERY_START + i;
+        const card = document.createElement('div');
+        card.className = 'gallery-card';
+        card.innerHTML =
+          '<div class="gallery-item">' +
+            '<img src="' + n + '.jpg" alt="Memory ' + (i + 1) + '" loading="lazy"/>' +
+            '<div class="overlay">' + galleryEmojis[i % galleryEmojis.length] + '</div>' +
+          '</div>' +
+          '<p class="gallery-caption">' + galleryCaptions[i] + '</p>';
+        galleryEl.appendChild(card);
+      }
+    }
 
     const captions = [
-      "White outfit, zero warning — my favorite malfunction 🤍",
-      "Office corridor: total silence. Chat: unlimited data 📶",
+      "You in white = my whole mood 🤍",
+      "Corridor silence, chat chaos, this face — my favorite combo",
       "In-charge by title, my favorite person by default 💼💖",
       "Forget the argument, never forget her 🧠",
       "Same building, different floors, one shared favorite color 🤍",
-      "Years apart on paper, none in overthinking her replies ⏳",
+      "Reply timing forgiven, this face never gets old ⏳",
       "IT support to In-charge — ticket #1: I like you 🎫",
       "Seen 10:42am, replied 6:15pm, loved unconditionally 💌"
     ];
@@ -882,9 +911,10 @@
     carouselTrack.removeChild(prevBtn);
     carouselTrack.removeChild(nextBtn);
     captions.forEach((cap, i) => {
+      const n = CAROUSEL_START + i;
       const div = document.createElement('div');
       div.className = 'carousel-slide' + (i === 0 ? ' active' : '');
-      div.innerHTML = '<img src="' + placeholderPhoto(i + 4, 'replace: moment ' + (i + 1)) + '" alt="Moment ' + (i + 1) + '" loading="lazy"/>' +
+      div.innerHTML = '<img src="' + n + '.jpg" alt="Moment ' + (i + 1) + '" loading="lazy"/>' +
         '<div class="carousel-caption">' + cap + '</div>';
       carouselTrack.appendChild(div);
     });
@@ -937,7 +967,7 @@
     if (Math.abs(diff) > 40) changeSlide(diff > 0 ? 1 : -1);
   }, { passive: true });
 
-  /* ── NO BUTTON RUNS AWAY ── */
+  /* ── NO BUTTON: dodges the cursor/finger and never overlaps the Yes button ── */
   const taunts = [
     "That button also needs the doctor's checkup 🩺",
     "In-charge overruled — this button has no authority here.",
@@ -950,20 +980,83 @@
   ];
   let tauntIdx = 0;
 
-  function runAway() {
-    const btn = document.getElementById('no-btn');
-    const wrap = document.getElementById('btn-wrap');
-    const wRect = wrap.getBoundingClientRect();
-    const maxX = Math.min(wRect.width / 2 - 40, 120);
-    const maxY = Math.min(wRect.height - 90, 100);
-    const rx = (Math.random() - 0.5) * 2 * maxX;
-    const ry = 60 + Math.random() * maxY;
-    btn.style.left  = '50%';
-    btn.style.transform = `translate(calc(-50% + ${rx}px), ${ry}px)`;
-    btn.style.top = '0px';
-    document.getElementById('no-taunt').textContent = taunts[tauntIdx % taunts.length];
-    tauntIdx++;
+  const noBtn = document.getElementById('no-btn');
+  const yesBtn = document.getElementById('yes-btn');
+  const btnWrap = document.getElementById('btn-wrap');
+
+  function rectsOverlap(ax, ay, aw, ah, bx, by, bw, bh) {
+    return ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by;
   }
+
+  function getYesExclusionBox(wrapRect) {
+    const yesRect = yesBtn.getBoundingClientRect();
+    const margin = 22;
+    return {
+      x: yesRect.left - wrapRect.left - margin,
+      y: yesRect.top - wrapRect.top - margin,
+      w: yesRect.width + margin * 2,
+      h: yesRect.height + margin * 2
+    };
+  }
+
+  function pickNonOverlappingPos() {
+    const wrapRect = btnWrap.getBoundingClientRect();
+    const btnW = noBtn.offsetWidth || 90;
+    const btnH = noBtn.offsetHeight || 50;
+    const maxLeft = Math.max(wrapRect.width - btnW, 0);
+    const maxTop = Math.max(wrapRect.height - btnH, 0);
+    const yesBox = getYesExclusionBox(wrapRect);
+
+    let left, top, tries = 0;
+    do {
+      left = Math.random() * maxLeft;
+      top = Math.random() * maxTop;
+      tries++;
+    } while (
+      rectsOverlap(left, top, btnW, btnH, yesBox.x, yesBox.y, yesBox.w, yesBox.h) &&
+      tries < 30
+    );
+
+    if (tries >= 30) {
+      const corners = [
+        { left: 0, top: 0 },
+        { left: maxLeft, top: 0 },
+        { left: 0, top: maxTop },
+        { left: maxLeft, top: maxTop }
+      ];
+      corners.sort((a, b) => {
+        const da = Math.hypot(a.left - yesBox.x, a.top - yesBox.y);
+        const db = Math.hypot(b.left - yesBox.x, b.top - yesBox.y);
+        return db - da;
+      });
+      left = corners[0].left;
+      top = corners[0].top;
+    }
+    return { left, top };
+  }
+
+  function placeNoBtnInitial() {
+    const pos = pickNonOverlappingPos();
+    noBtn.style.left = pos.left + 'px';
+    noBtn.style.top = pos.top + 'px';
+  }
+
+  function dodgeNoBtn(e) {
+    if (e && e.cancelable) e.preventDefault();
+    const pos = pickNonOverlappingPos();
+    noBtn.style.left = pos.left + 'px';
+    noBtn.style.top = pos.top + 'px';
+    document.getElementById('no-taunt').textContent = taunts[tauntIdx % taunts.length];
+    tauntIdx = (tauntIdx + 1) % taunts.length;
+  }
+
+  ['mouseenter', 'pointerdown', 'touchstart', 'focus', 'click'].forEach(evt => {
+    noBtn.addEventListener(evt, dodgeNoBtn, { passive: false });
+  });
+
+  window.addEventListener('load', placeNoBtnInitial);
+  window.addEventListener('resize', placeNoBtnInitial);
+  placeNoBtnInitial();
 
   /* ── YES BUTTON ── */
   function sayYes() {
@@ -1012,11 +1105,13 @@
     draw();
   }
 
-  /* ── MUSIC: synthesized "Happy Birthday" tune (no external audio file needed) ── */
+  /* ── MUSIC: bday.mp3 in the same folder, with a synthesized fallback if it's missing ── */
   const AudioCtx = window.AudioContext || window.webkitAudioContext;
   let actx = null;
   let musicPlaying = false;
   let musicTimer = null;
+  let usingFallback = false;
+  const audioEl = document.getElementById('bday-audio');
 
   const NOTE_FREQ = {
     C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23, G4: 392.00,
@@ -1053,34 +1148,55 @@
     return totalDur;
   }
 
-  function loopMelody() {
-    if (!musicPlaying) return;
+  function loopFallbackMelody() {
+    if (!musicPlaying || !usingFallback) return;
     const dur = scheduleMelody(0.05);
-    musicTimer = setTimeout(loopMelody, (dur + 0.4) * 1000);
+    musicTimer = setTimeout(loopFallbackMelody, (dur + 0.4) * 1000);
   }
 
-  function playMusic() {
+  function startFallback() {
+    usingFallback = true;
     if (!AudioCtx) return;
     if (!actx) actx = new AudioCtx();
     if (actx.state === 'suspended') actx.resume();
-    musicPlaying = true;
+    loopFallbackMelody();
+  }
+
+  function stopFallback() {
+    usingFallback = false;
+    if (musicTimer) clearTimeout(musicTimer);
+  }
+
+  function updateMusicBtn(playing) {
     const btn = document.getElementById('musicBtn');
-    btn.textContent = '🔊';
-    btn.classList.add('playing');
-    loopMelody();
+    btn.textContent = playing ? '🔊' : '🔇';
+    btn.classList.toggle('playing', playing);
+  }
+
+  function playMusic() {
+    musicPlaying = true;
+    updateMusicBtn(true);
+    audioEl.currentTime = 0;
+    const p = audioEl.play();
+    if (p !== undefined) {
+      p.catch(() => { startFallback(); });
+    }
   }
 
   function pauseMusic() {
     musicPlaying = false;
-    if (musicTimer) clearTimeout(musicTimer);
-    const btn = document.getElementById('musicBtn');
-    btn.textContent = '🔇';
-    btn.classList.remove('playing');
+    updateMusicBtn(false);
+    audioEl.pause();
+    stopFallback();
   }
 
   function toggleMusic() {
     musicPlaying ? pauseMusic() : playMusic();
   }
+
+  audioEl.addEventListener('error', () => {
+    if (musicPlaying) startFallback();
+  });
 
   // Try to start on load (works if the browser allows it); otherwise the button starts it.
   document.addEventListener('DOMContentLoaded', () => { try { playMusic(); } catch (e) {} });

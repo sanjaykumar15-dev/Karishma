@@ -627,7 +627,7 @@
 
 <!-- ░░ HERO ░░ -->
 <section id="hero">
-  <img class="hero-photo" id="hero-photo" src="/images/1.jpg" alt="gappu"/>
+  <img class="hero-photo" id="hero-photo" src="./images/1.jpg" alt="gappu"/>
   <p class="photo-caption">You grabbed my heart 💘</p>
   <h1 class="hero-title">Happy Birthday, Beautiful 🎉💖</h1>
   <p class="hero-subtitle">Same office, same floor almost — still somehow a long-distance 🤪</p>
@@ -717,7 +717,7 @@
 <!-- ░░ PROPOSAL ░░ -->
 <section id="proposal">
   <div class="cake-wrap">🎂</div>
-  <img class="proposal-photo" id="proposal-photo" src="/images/2.jpg" alt="Karishma"/>
+  <img class="proposal-photo" id="proposal-photo" src="./images/2.jpg" alt="Karishma"/>
   <p class="photo-caption">I could die for your smile 😍</p>
 
   <h2 class="proposal-q">Since we're both experts at hallway silence...</h2>
@@ -746,11 +746,11 @@
   <br>
   <div class="yes-photos">
     <div class="yes-photo-block">
-      <img class="hero-photo" id="yes-photo-1" style="width:180px;height:180px;border-color:#ffd700;" src="/images/3.jpg" alt="Karishma"/>
+      <img class="hero-photo" id="yes-photo-1" style="width:180px;height:180px;border-color:#ffd700;" src="./images/3.jpg" alt="Karishma"/>
       <p class="photo-caption">Caught staring, not sorry 👀</p>
     </div>
     <div class="yes-photo-block">
-      <img class="hero-photo" id="yes-photo-2" style="width:180px;height:180px;border-color:#ffd700;" src="/images/4.jpg" alt="Karishma"/>
+      <img class="hero-photo" id="yes-photo-2" style="width:180px;height:180px;border-color:#ffd700;" src="./images/4.jpg" alt="Karishma"/>
       <p class="photo-caption">Still not over this photo 😌</p>
     </div>
   </div>
@@ -892,7 +892,7 @@
         card.className = 'gallery-card';
         card.innerHTML =
           '<div class="gallery-item">' +
-            '<img src="'+ /images/ + n + '.jpg" alt="Memory ' + (i + 1) + '" loading="lazy"/>' +
+            '<img src="'+ ./images/ + n + '.jpg" alt="Memory ' + (i + 1) + '" loading="lazy"/>' +
             '<div class="overlay">' + galleryEmojis[i % galleryEmojis.length] + '</div>' +
           '</div>' +
           '<p class="gallery-caption">' + galleryCaptions[i] + '</p>';
@@ -921,7 +921,7 @@
       const n = CAROUSEL_START + i;
       const div = document.createElement('div');
       div.className = 'carousel-slide' + (i === 0 ? ' active' : '');
-      div.innerHTML = '<img src="'+ /images/ + n + '.jpg" alt="Moment ' + (i + 1) + '" loading="lazy"/>' +
+      div.innerHTML = '<img src="'+ ./images/ + n + '.jpg" alt="Moment ' + (i + 1) + '" loading="lazy"/>' +
         '<div class="carousel-caption">' + cap + '</div>';
       carouselTrack.appendChild(div);
     });
